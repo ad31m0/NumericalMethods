@@ -20,7 +20,7 @@ public class Product extends Function implements Iterable<Function> {
 
 	public Product(List<Function> functions) {
 		this();
-		functions.addAll(functions);
+		this.functions.addAll(functions);
 
 	}
 
@@ -106,7 +106,11 @@ public class Product extends Function implements Iterable<Function> {
 		List<Product> splited = new ArrayList<Product>();
 		splited.add(new Product(clone.get(0)));
 		clone.remove(0);
-		splited.add(new Product(clone));
+		
+		System.out.println("ss " + clone.size());
+		Product p2 = new Product(clone);
+		System.out.println(p2);
+		splited.add(p2);
 		return splited;
 	}
 
@@ -119,5 +123,22 @@ public class Product extends Function implements Iterable<Function> {
 	protected Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public String toString() {
+		return functions.toString();
+	}
+	public static void main(String[] args) {
+		NumberFun f1 = new NumberFun(2);
+
+		NumberFun f2 = new NumberFun(3);
+
+		NumberFun f3 = new NumberFun(4);
+		
+		Product p = new Product(f1, f2, f3);
+		
+		System.out.println(p);
+		System.out.println(p.split());
 	}
 }

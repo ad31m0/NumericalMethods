@@ -28,11 +28,8 @@ public abstract class Method {
 	protected void initSuperMethod(Function f, Map<String, Object> arguments) throws ArgumentsException {
 		if (!arguments.containsKey(TOLERANCE))
 			throw new ArgumentsException(String.format("%s Argument of Type Double is missing", TOLERANCE));
-		if (!arguments.containsKey(MAX_ITERATIONS))
-			throw new ArgumentsException(String.format("%s Argument of Type Integer is missing", MAX_ITERATIONS));
 
 		this.tolerance = (Double) arguments.get(TOLERANCE);
-		this.max_iterations = (Integer) arguments.get(MAX_ITERATIONS);
 		this.points = new ArrayList<Double>();
 	}
 

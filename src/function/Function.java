@@ -32,6 +32,11 @@ public abstract class Function {
 		cloned.power--;
 		return cloned;
 	}
+	
+	@Override
+	public String toString() {
+		return "(" + getValue(2) +")";
+	}
 
 	@Override
 	protected abstract Object clone() throws CloneNotSupportedException;
