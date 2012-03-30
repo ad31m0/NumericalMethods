@@ -18,7 +18,7 @@ public class TestMethods {
 		// Suppose that the function was created using the parser.
 		Polynomial p = new Polynomial();
 		p.add(new XFun(1.0, 3));
-		Function f = new SinFun(p);
+		Function f = new CosFun(p);
 
 		/*
 		 * map to pass for the solve method to add arguments applies the Bundle
@@ -30,12 +30,13 @@ public class TestMethods {
 		// Fixed Point;
 		arguments_bundle.put(Method.MAX_ITERATIONS, 20); // 20 max iterations
 		arguments_bundle.put(Method.TOLERANCE, 0.001); // tolerance
-		arguments_bundle.put(Method.START_POINT, 0.1); // the value for p0
+		arguments_bundle.put(Method.START_POINT, 1.1); // the value for p0
 
 		try {
 			Solution ss = EquationsSolver.solve(f, arguments_bundle, Method.FIXED_POINT_METHOD);
 			System.out.print("Fixed Point : ");
 			System.out.println(ss.solution + " ~= 0.0");
+			System.out.println(ss.points);
 		} catch (Exception e) {
 			System.out.println("can't be solved");
 
@@ -45,14 +46,15 @@ public class TestMethods {
 		arguments_bundle.clear();
 		arguments_bundle.put(Method.MAX_ITERATIONS, 20); // 20 max iterations
 		arguments_bundle.put(Method.TOLERANCE, 0.001); // tolerance
-		arguments_bundle.put(Method.START_POINT, -.01); // the value for p0
-		arguments_bundle.put(Method.END_POINT, 2.5); // the value for p1
+		arguments_bundle.put(Method.START_POINT, 0.0); // the value for p0
+		arguments_bundle.put(Method.END_POINT, 3.0); // the value for p1
 
 		try {
 			Solution ss = EquationsSolver.solve(f, arguments_bundle, Method.BISECTION_METHOD);
 
 			System.out.print("Bisection : ");
 			System.out.println(ss.solution + " ~= 0.0");
+			System.out.println(ss.points);
 		} catch (Exception e) {
 			System.out.println("can't be solved" + e.getMessage());
 			e.printStackTrace();
@@ -71,6 +73,7 @@ public class TestMethods {
 
 			System.out.print("False Position : ");
 			System.out.println(ss.solution + " ~= 0.0");
+			System.out.println(ss.points);
 		} catch (Exception e) {
 			System.out.println("can't be solved" + e.getMessage());
 			e.printStackTrace();
@@ -89,6 +92,7 @@ public class TestMethods {
 
 			System.out.print("Secant : ");
 			System.out.println(ss.solution + " ~= 0.0");
+			System.out.println(ss.points);
 		} catch (Exception e) {
 			System.out.println("can't be solved" + e.getMessage());
 			e.printStackTrace();
@@ -100,13 +104,14 @@ public class TestMethods {
 		arguments_bundle.put(Method.MAX_ITERATIONS, 20); // 20 max iterations
 		arguments_bundle.put(Method.TOLERANCE, 0.001); // tolerance
 		arguments_bundle.put(Method.START_POINT, 1.2); // the value for p0
+		
 
 		try {
 			Solution ss = EquationsSolver.solve(f, arguments_bundle, Method.NEWTON_METHOD);
 
 			System.out.print("Newton : ");
 			System.out.println(ss.solution + " ~= 0.0");
-
+			System.out.println(ss.points);
 		} catch (Exception e) {
 			System.out.println("can't be solved" + e.getMessage());
 			e.printStackTrace();

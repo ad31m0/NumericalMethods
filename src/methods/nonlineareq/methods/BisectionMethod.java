@@ -19,7 +19,7 @@ public class BisectionMethod extends Method {
 		if (ya * yb > 0)
 			throw new NoSolutionException("Two bracketing points are on the same side of x-axis");
 
-		max_iterations = (int) (1 + round((log(start_point - end_point) - log(tolerance)) / log(2)));
+		max_iterations = (int) (1 + round((log(end_point - start_point) - log(tolerance)) / log(2)));
 
 		for (iterations = 0; iterations < max_iterations; iterations++) {
 			points.add(a);
@@ -48,7 +48,7 @@ public class BisectionMethod extends Method {
 		yc = f.getValue(c);
 		error = abs(a - b);
 
-		return new Solution(yc);
+		return new Solution(c);
 	}
 
 	@Override

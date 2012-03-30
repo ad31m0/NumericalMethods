@@ -24,7 +24,7 @@ public class NewtonMethod extends Method {
 			error = 2 * absolute_error / (abs(p1 + tolerance));
 			p0 = p1;
 
-			y = f.getValue(p1);
+			y = f.getValue(p0);
 			if (error < tolerance | absolute_error < tolerance | abs(y) < epson) {
 				stopping_reason |= TOLERANCE_REACHED;
 				break;
@@ -34,7 +34,7 @@ public class NewtonMethod extends Method {
 		if (iterations == max_iterations)
 			stopping_reason |= MAX_ITERATIONS_REACHED;
 
-		return new Solution(y);
+		return new Solution(p0);
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public class FixedPointMethod extends Method {
 			points.add(f.getValue(points.get(iterations - 1)));
 			double absoluteError = Math.abs(points.get(iterations) - points.get(iterations - 1));
 			error = absoluteError / (points.get(iterations) + epson);
-			if (error >= tolerance || absoluteError >= tolerance) {
+			if (error <= tolerance || absoluteError <= tolerance) {
 				stopping_reason |= TOLERANCE_REACHED;
 				break;
 			}
