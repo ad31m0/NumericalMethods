@@ -14,8 +14,7 @@ public class ZeroFunction extends Function{
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return null;
+		return new ZeroFunction();
 	}
 
 }

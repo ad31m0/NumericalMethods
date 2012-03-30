@@ -21,13 +21,17 @@ public abstract class Method {
 
 	protected int stopping_reason;
 
-	public abstract Solution solve(Function f, Map<String, Object> arguments) throws ArgumentsException, NoSolutionException;
+	public abstract Solution solve(Function f, Map<String, Object> arguments)
+			throws ArgumentsException, NoSolutionException;
 
-	public abstract void init(Function f, Map<String, Object> arguments) throws ArgumentsException;
+	public abstract void init(Function f, Map<String, Object> arguments)
+			throws ArgumentsException;
 
-	protected void initSuperMethod(Function f, Map<String, Object> arguments) throws ArgumentsException {
+	protected void initSuperMethod(Function f, Map<String, Object> arguments)
+			throws ArgumentsException {
 		if (!arguments.containsKey(TOLERANCE))
-			throw new ArgumentsException(String.format("%s Argument of Type Double is missing", TOLERANCE));
+			throw new ArgumentsException(String.format(
+					"%s Argument of Type Double is missing", TOLERANCE));
 
 		this.tolerance = (Double) arguments.get(TOLERANCE);
 		this.points = new ArrayList<Double>();
@@ -43,7 +47,6 @@ public abstract class Method {
 		public final int iterations, stopping_reason;
 		public final double error, solution;
 		public final List<Double> points;
-		
 
 		public Solution(double solution) {
 			this.solution = solution;
@@ -64,7 +67,7 @@ public abstract class Method {
 	 * @see {@link FixedPointMethod}
 	 * @author Belbesy
 	 */
-	public static final int FIXED_POINT = 0;
+	public static final int FIXED_POINT_METHOD = 0;
 	/**
 	 * Solves the equations with the bisection method
 	 * 
@@ -74,7 +77,7 @@ public abstract class Method {
 	 * @see {@link BisectionMethod}
 	 * @author Belbesy
 	 */
-	public static final int BISECTION = 1;
+	public static final int BISECTION_METHOD = 1;
 	/**
 	 * Solves the equations with the false position method
 	 * 
@@ -85,7 +88,10 @@ public abstract class Method {
 	 * @see {@link FalsePositionMethod}
 	 * @author Belbesy
 	 */
-	public static final int FALSE_POSITION = 2;
+	public static final int FALSE_POSITION_METHOD = 2;
+
+	public static final int SECANT_METHOD = 3;
+	public static final int NEWTON_METHOD = 4;
 
 	public static final String TOLERANCE = "TOLERANCE";
 	public static final String MAX_ITERATIONS = "MAX_ITERATIONS";

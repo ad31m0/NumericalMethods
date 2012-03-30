@@ -15,6 +15,8 @@ public class XFun extends Function{
 	
 	@Override
 	public Function differentiateFunction() {
+		if(power == 1)
+			return new NumberFun(coefficient);
 		Polynomial result = new Polynomial();
 		Product res = new Product();
 		res.multiply(new XFun(coefficient*power, power-1));
@@ -23,8 +25,11 @@ public class XFun extends Function{
 	}
 
 	@Override
+	public String toString(){
+		return coefficient + " (x^" + power + ")";
+	}
+	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return null;
+		return new XFun(coefficient, power);
 	}
 }

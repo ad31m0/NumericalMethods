@@ -18,10 +18,17 @@ public class NumberFun extends Function {
 		return new ZeroFunction();
 	}
 
-	@Override
+		@Override
 	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return null;
+		NumberFun clone = new NumberFun(number);
+		clone.power = this.power;
+		return clone;		
 	}
+	
+	@Override
+	public String toString(){
+		return ""+number;
+	}
+
 
 }

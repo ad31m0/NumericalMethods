@@ -9,7 +9,9 @@ import methods.nonlineareq.methods.BisectionMethod;
 import methods.nonlineareq.methods.FalsePositionMethod;
 import methods.nonlineareq.methods.FixedPointMethod;
 import methods.nonlineareq.methods.Method;
+import methods.nonlineareq.methods.NewtonMethod;
 import methods.nonlineareq.methods.Method.Solution;
+import methods.nonlineareq.methods.SecantMethod;
 import function.Function;
 
 public class EquationsSolver {
@@ -19,7 +21,7 @@ public class EquationsSolver {
 	 * 
 	 * @author Belbesy
 	 */
-	public static final Method[] methods = { new FixedPointMethod(), new BisectionMethod(), new FalsePositionMethod() };
+	public static final Method[] methods = { new FixedPointMethod(), new BisectionMethod(), new FalsePositionMethod(), new SecantMethod(), new NewtonMethod() };
 
 	
 	/**

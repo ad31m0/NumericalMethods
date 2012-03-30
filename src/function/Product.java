@@ -11,6 +11,7 @@ public class Product extends Function implements Iterable<Function> {
 
 	public Product() {
 		functions = new LinkedList<Function>();
+		power = 1;
 	}
 
 	public Product(LinkedList<Function> funs, double pow) {
@@ -42,7 +43,8 @@ public class Product extends Function implements Iterable<Function> {
 	// multiplies product by 1 function
 	public Product multiply(Function f) {
 		// add function to the list
-		functions.add(f);
+		if(!(f instanceof NumberFun && ((NumberFun)(f)).getValue(0) == 1))
+			functions.add(f);		
 		return this;
 	}
 
@@ -52,7 +54,7 @@ public class Product extends Function implements Iterable<Function> {
 		// of the product that called the method
 		Iterator<Function> it = p.getFunctions().iterator();
 		while (it.hasNext()) {
-			functions.add(it.next());
+			multiply(it.next());
 		}
 		return this;
 	}
@@ -67,9 +69,14 @@ public class Product extends Function implements Iterable<Function> {
 		return p1;
 	}
 
-	@Override
+		@Override
 	public double getValue(double x) {
-		return 0;
+		double value = 1;
+		Iterator<Function> it = functions.iterator();
+		while(it.hasNext()){
+			value *= it.next().getValue(x); 
+		}
+		return value;
 	}
 
 	@Override
@@ -106,11 +113,7 @@ public class Product extends Function implements Iterable<Function> {
 		List<Product> splited = new ArrayList<Product>();
 		splited.add(new Product(clone.get(0)));
 		clone.remove(0);
-		
-		System.out.println("ss " + clone.size());
-		Product p2 = new Product(clone);
-		System.out.println(p2);
-		splited.add(p2);
+		splited.add(new Product(clone));
 		return splited;
 	}
 
@@ -119,26 +122,29 @@ public class Product extends Function implements Iterable<Function> {
 		return functions.iterator();
 	}
 
+	
+	
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return null;
+	protected Object clone() throws CloneNotSupportedException {		
+		LinkedList<Function> cl = new LinkedList<Function>();
+		Iterator<Function> it = functions.iterator();
+		while(it.hasNext()){
+			cl.add(it.next());
+		}
+		return new Product(cl, power);
 	}
 	
 	@Override
-	public String toString() {
-		return functions.toString();
+	public String toString(){
+		String s = "[";
+		Iterator<Function> it = functions.iterator();
+		if(it.hasNext())
+			s += it.next().toString();
+		while(it.hasNext()){
+			s += " * " + it.next().toString();
+		}
+		s+="]";
+		return s;			
 	}
-	public static void main(String[] args) {
-		NumberFun f1 = new NumberFun(2);
 
-		NumberFun f2 = new NumberFun(3);
-
-		NumberFun f3 = new NumberFun(4);
-		
-		Product p = new Product(f1, f2, f3);
-		
-		System.out.println(p);
-		System.out.println(p.split());
-	}
 }

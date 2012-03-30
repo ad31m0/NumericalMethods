@@ -13,9 +13,9 @@ public class Polynomial extends Function implements Iterable<Product> {
 		products = new LinkedList<Product>();
 	}
 
-	public Polynomial(int pow, List<Product> prod) {
+	public Polynomial(double power, List<Product> prod) {
 		this();
-		power = pow;
+		this.power = power;
 		products.addAll(prod);
 	}
 
@@ -36,8 +36,12 @@ public class Polynomial extends Function implements Iterable<Product> {
 
 	@Override
 	public double getValue(double x) {
-		// TODO Auto-generated method stub
-		return 0;
+		double sum = 0;
+		Iterator<Product> it = products.iterator();
+		while (it.hasNext()) {
+			sum += it.next().getValue(x);
+		}
+		return sum;
 	}
 
 	@Override
@@ -67,9 +71,25 @@ public class Polynomial extends Function implements Iterable<Product> {
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		Polynomial clone = new Polynomial();
+		LinkedList<Product> cl = new LinkedList<Product>();
+		Iterator<Product> it = products.iterator();
+		while (it.hasNext()) {
+			cl.add(it.next());
+		}
+		return new Polynomial(power, cl);
+	}
 
-		return clone;
+	@Override
+	public String toString() {
+		String s = "(";
+		Iterator<Product> it = products.iterator();
+		if (it.hasNext())
+			s += it.next();
+		while (it.hasNext()) {
+			s += " + " + it.next().toString();
+		}
+		s += ")";
+		return s;
 	}
 
 }

@@ -12,7 +12,8 @@ public class FalsePositionMethod extends Method {
 	private double start_point, end_point;
 
 	@Override
-	public Solution solve(Function f, Map<String, Object> arguments) throws NoSolutionException {
+	public Solution solve(Function f, Map<String, Object> arguments) throws NoSolutionException, ArgumentsException {
+		init(f, arguments);
 		// TODO : bound error
 		double ya = f.getValue(start_point), yb = f.getValue(end_point), a = start_point, b = end_point, c = 0, yc;
 		if (ya * yb > 0)

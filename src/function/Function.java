@@ -11,6 +11,9 @@ public abstract class Function {
 
 		Function functionDerivative = differentiateFunction();
 
+		if (Math.abs(power) < 0.001)
+			return new ZeroFunction();
+
 		if (Math.abs(power - 1) < 0.001) // Power ~= 1
 			return functionDerivative;
 
@@ -25,17 +28,16 @@ public abstract class Function {
 		try {
 			cloned = (Function) clone();
 		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
 		cloned.power--;
 		return cloned;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "(" + getValue(2) +")";
+		return "(" + getValue(2) + ")";
 	}
 
 	@Override

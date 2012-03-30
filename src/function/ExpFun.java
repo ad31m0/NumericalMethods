@@ -20,10 +20,12 @@ public class ExpFun extends Function{
 		res.multiply(new ExpFun(pow));
 		return res.multiply(pow.differentiateFunction()); 
 	}
+	public String toString() {
+		return "e ^ (" + pow.toString() + ")";
+	}
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return null;
+	protected Object clone() throws CloneNotSupportedException {		
+		return new ExpFun(pow);
 	}
 
 }

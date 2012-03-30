@@ -10,6 +10,7 @@ public class CosFun extends Function {
 	}
 
 	public CosFun(Polynomial a, double p) {
+		angle =a;
 		power = p;
 	}
 
@@ -20,16 +21,21 @@ public class CosFun extends Function {
 
 	@Override
 	public Function differentiateFunction() {
+	if (power == 0) {
+			return new ZeroFunction();
+		}
 		Product result = new Product();
 		result.multiply(new NumberFun(-1));
 		result.multiply(new SinFun(angle));
 		result.multiply(angle.differentiateFunction());
 		return result;
 	}
-
+public String toString() {
+		return "cos(" + angle.toString() + ")";
+	}
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
-		return null;
+		return new CosFun(angle, power);
 	}
 }

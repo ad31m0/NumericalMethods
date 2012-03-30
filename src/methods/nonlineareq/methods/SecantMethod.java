@@ -12,7 +12,7 @@ public class SecantMethod extends Method {
 
 	@Override
 	public Solution solve(Function f, Map<String, Object> arguments) throws ArgumentsException, NoSolutionException {
-
+		init(f, arguments);
 		double p0 = start_point, p1 = end_point, p2 = 0,y=0;
 		for (iterations = 0; iterations < max_iterations; iterations++) {
 			points.add(p0);
